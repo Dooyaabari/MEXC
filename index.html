@@ -6,206 +6,113 @@
 <title>Tesla Clone</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
-
-body {
-  background: #fff;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+body{background:#fff;}
 
 /* HERO */
-.hero {
-  position: relative;
-  height: 100vh;
-  min-height: 600px;
-  overflow: hidden;
-}
-
-/* SLIDER */
-.slider {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.slide {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.slide.active {
-  opacity: 1;
-}
+.hero{position:relative;height:100vh;min-height:600px;overflow:hidden;}
+.slider{position:absolute;width:100%;height:100%;}
+.slide{position:absolute;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:1s;}
+.slide.active{opacity:1;}
 
 /* NAVBAR */
-.navbar {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 5vw;
-  color: white;
+.navbar{
+  position:relative;
+  z-index:10;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 5vw;
+  color:#fff;
 }
-
-.logo {
-  font-weight: bold;
-  letter-spacing: 3px;
-  font-size: clamp(14px, 1.2vw, 18px);
-}
-
-.nav-center {
-  display: flex;
-  gap: 2vw;
-}
-
-.nav-item {
-  cursor: pointer;
-  font-size: clamp(12px, 1vw, 14px);
-}
-
-.nav-right {
-  display: flex;
-  gap: 10px;
-}
-
-.icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.logo{font-weight:bold;letter-spacing:3px;}
+.nav-center{display:flex;gap:25px;}
+.nav-item{cursor:pointer;font-size:14px;}
+.nav-right{display:flex;gap:10px;}
+.icon{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  display:flex;align-items:center;justify-content:center;
 }
 
 /* DROPDOWN */
-.dropdown {
-  position: absolute;
-  top: 70px;
-  width: 100%;
-  display: none;
-  z-index: 20;
+.dropdown{
+  position:absolute;
+  top:70px;
+  width:100%;
+  display:none;
+  backdrop-filter:blur(20px);
+  background:rgba(245,245,245,0.85);
+}
+.dropdown.show{display:block;}
+
+.dropdown-wrapper{padding:50px 5vw;}
+
+.dropdown-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
 }
 
-.dropdown.show {
-  display: block;
-  backdrop-filter: blur(18px);
-  background: rgba(235,235,235,0.7);
+.dropdown-item img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:6px;
 }
-
-.dropdown-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
-  gap: 25px;
-  padding: 40px 5vw;
-}
-
-.dropdown-item img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 6px;
-}
-
-.dropdown-item p {
-  text-align: center;
-  margin-top: 8px;
-  color: #111;
+.dropdown-item h4{
+  text-align:center;
+  margin-top:8px;
+  font-size:14px;
 }
 
 /* CAROUSEL */
-.car-carousel {
-  position: relative;
-  padding: 40px 5vw;
+.car-carousel{padding:40px 5vw;}
+.carousel-title{font-size:24px;margin-bottom:20px;}
+
+.carousel-track{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+}
+.carousel-track::-webkit-scrollbar{display:none;}
+
+.car-card{
+  flex:0 0 auto;
+  width:clamp(240px,28vw,360px);
+  border-radius:12px;
+  overflow:hidden;
+  background:#f5f5f5;
+  scroll-snap-align:start;
 }
 
-.carousel-title {
-  font-size: clamp(20px, 2vw, 28px);
-  margin-bottom: 20px;
+.car-card img{
+  width:100%;
+  height:70%;
+  object-fit:cover;
 }
 
-.carousel-track {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-}
-
-.carousel-track::-webkit-scrollbar {
-  display: none;
-}
-
-.car-card {
-  min-width: clamp(250px, 30vw, 380px);
-  height: 260px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #f5f5f5;
-  flex: 0 0 auto;
-}
-
-.car-card img {
-  width: 100%;
-  height: 70%;
-  object-fit: cover;
-}
-
-.car-card h3 {
-  padding: 10px;
-  font-size: clamp(14px, 1.2vw, 16px);
-}
+.car-card h3{padding:10px;}
 
 /* ARROWS */
-.arrow {
-  position: absolute;
-  top: 55%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
+.arrow{
+  position:absolute;
+  top:55%;
+  transform:translateY(-50%);
+  width:40px;height:40px;
+  border:none;border-radius:50%;
+  background:rgba(0,0,0,0.6);
+  color:#fff;font-size:18px;
+  cursor:pointer;
 }
+.arrow.left{left:10px;}
+.arrow.right{right:10px;}
 
-.arrow.left { left: 10px; }
-.arrow.right { right: 10px; }
-
-/* ================= MOBILE ================= */
-@media (max-width: 900px) {
-
-  .nav-center {
-    display: none;
-  }
-
-  .icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .hero {
-    height: 80vh;
-  }
-
-  .dropdown-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .arrow {
-    display: none;
-  }
+@media(max-width:768px){
+  .nav-center{display:none;}
+  .dropdown-grid{grid-template-columns:1fr;}
+  .arrow{display:none;}
 }
 </style>
 </head>
@@ -245,70 +152,106 @@ body {
 </header>
 
 <section class="car-carousel">
-
 <h2 class="carousel-title">Discover Vehicles</h2>
 
 <button class="arrow left" onclick="scrollCarousel(-1)">❮</button>
 <button class="arrow right" onclick="scrollCarousel(1)">❯</button>
 
 <div class="carousel-track" id="carouselTrack">
-
   <div class="car-card"><img src="https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg"><h3>Model S</h3></div>
   <div class="car-card"><img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg"><h3>Model 3</h3></div>
   <div class="car-card"><img src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"><h3>Model X</h3></div>
   <div class="car-card"><img src="https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg"><h3>Model Y</h3></div>
-
 </div>
-
 </section>
 
 <script>
-const navItems = document.querySelectorAll('.nav-item');
-const dropdown = document.getElementById('dropdown');
-const dropdownContent = document.getElementById('dropdown-content');
 
 const menus = {
-  vehicles:[{name:"Model S",img:"https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg"}],
-  energy:[{name:"Solar",img:"https://images.pexels.com/photos/9875441/pexels-photo-9875441.jpeg"}],
-  charging:[{name:"Supercharging",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"}],
-  discover:[{name:"Careers",img:"https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"}],
-  shop:[{name:"Accessories",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"}]
+  vehicles:[
+    {name:"Model S",img:"https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg"},
+    {name:"Model 3",img:"https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg"},
+    {name:"Model X",img:"https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"},
+    {name:"Model Y",img:"https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg"},
+    {name:"Cybertruck",img:"https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg"},
+    {name:"Roadster",img:"https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"}
+  ],
+  energy:[
+    {name:"Solar Panels",img:"https://images.pexels.com/photos/9875441/pexels-photo-9875441.jpeg"},
+    {name:"Solar Roof",img:"https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg"},
+    {name:"Powerwall",img:"https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg"},
+    {name:"Megapack",img:"https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg"},
+    {name:"Grid Services",img:"https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg"},
+    {name:"Energy Software",img:"https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg"}
+  ],
+  charging:[
+    {name:"Supercharger",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
+    {name:"Home Charging",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"},
+    {name:"Wall Connector",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
+    {name:"Charging Map",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"},
+    {name:"Adapters",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
+    {name:"Charging Tips",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"}
+  ],
+  discover:[
+    {name:"Demo Drive",img:"https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg"},
+    {name:"Insurance",img:"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"},
+    {name:"Fleet",img:"https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"},
+    {name:"Careers",img:"https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"},
+    {name:"Investors",img:"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"},
+    {name:"Events",img:"https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg"}
+  ],
+  shop:[
+    {name:"Accessories",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"},
+    {name:"Charging Gear",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
+    {name:"Apparel",img:"https://images.pexels.com/photos/1002649/pexels-photo-1002649.jpeg"},
+    {name:"Lifestyle",img:"https://images.pexels.com/photos/1002649/pexels-photo-1002649.jpeg"},
+    {name:"Roof Rack",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"},
+    {name:"Wheels",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"}
+  ]
 };
+
+const navItems=document.querySelectorAll('.nav-item');
+const dropdown=document.getElementById('dropdown');
+const dropdownContent=document.getElementById('dropdown-content');
 
 navItems.forEach(item=>{
   item.addEventListener('mouseenter',()=>{
-    dropdownContent.innerHTML = `
-      <div class="dropdown-grid">
-        ${menus[item.dataset.menu].map(i=>`
-          <div class="dropdown-item">
-            <img src="${i.img}">
-            <p>${i.name}</p>
-          </div>
-        `).join('')}
+    dropdownContent.innerHTML=`
+      <div class="dropdown-wrapper">
+        <div class="dropdown-grid">
+          ${menus[item.dataset.menu].map(i=>`
+            <div class="dropdown-item">
+              <img src="${i.img}">
+              <h4>${i.name}</h4>
+            </div>
+          `).join('')}
+        </div>
       </div>
     `;
     dropdown.classList.add('show');
   });
 });
 
-document.addEventListener('click', e=>{
-  if(!e.target.closest('.navbar') && !e.target.closest('.dropdown')){
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.navbar')&&!e.target.closest('.dropdown')){
     dropdown.classList.remove('show');
   }
 });
 
-const slides = document.querySelectorAll('.slide');
-let current = 0;
-
+/* HERO SLIDER */
+const slides=document.querySelectorAll('.slide');
+let current=0;
 setInterval(()=>{
   slides[current].classList.remove('active');
-  current = (current+1)%slides.length;
+  current=(current+1)%slides.length;
   slides[current].classList.add('active');
 },4000);
 
+/* CAROUSEL */
 function scrollCarousel(dir){
-  document.getElementById('carouselTrack')
-    .scrollBy({ left: dir*300, behavior:'smooth' });
+  const track=document.getElementById('carouselTrack');
+  const card=track.querySelector('.car-card');
+  track.scrollBy({left:dir*(card.offsetWidth+16),behavior:'smooth'});
 }
 </script>
 
