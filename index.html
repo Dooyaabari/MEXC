@@ -2,258 +2,134 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tesla Style Clone</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: sans-serif;
 }
 
-body {
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-}
-
-/* HEADER */
-.tesla-header {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  z-index: 1000;
-  transition: 0.4s;
-}
-
-.tesla-header.scrolled {
-  background: rgba(255,255,255,0.9);
-  color: black;
-  backdrop-filter: blur(10px);
-}
-
-.logo {
-  letter-spacing: 10px;
-  font-weight: 700;
-}
-
-.nav-center {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 25px;
-}
-
-.nav-center a {
-  text-decoration: none;
-  color: inherit;
-  font-size: 14px;
-}
-
-.nav-right {
-  display: flex;
-  gap: 15px;
-}
-
-.menu-btn {
-  cursor: pointer;
-}
-
-/* SIDE MENU */
-.side-menu {
-  position: fixed;
-  right: -300px;
-  top: 0;
-  width: 300px;
-  height: 100%;
-  background: white;
-  transition: 0.4s;
-  padding: 20px;
-  z-index: 2000;
-}
-
-.side-menu.open {
-  right: 0;
-}
-
-.side-menu a {
-  display: block;
-  margin: 15px 0;
-  text-decoration: none;
-  color: black;
-}
-
-/* SECTIONS */
-.section {
+/* HERO SECTION */
+.hero {
+  position: relative;
   height: 100vh;
-  scroll-snap-align: start;
+  overflow: hidden;
+}
+
+/* SLIDER */
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* NAVBAR */
+.nav-center {
+  position: relative;
+  z-index: 10;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
   color: white;
-  padding-top: 100px;
+  font-weight: bold;
 }
 
-h1 {
-  font-size: 40px;
-}
-
-.buttons {
-  margin-bottom: 40px;
-  display: flex;
-  gap: 10px;
-}
-
-button {
-  padding: 10px 25px;
-  border: none;
+.nav-item {
   cursor: pointer;
 }
 
-.dark { background: black; color: white; }
-.light { background: white; color: black; }
-
-/* MOBILE */
-@media (max-width: 900px) {
-  .nav-center {
-    display: none;
-  }
-
-  /* DROPDOWN */
+/* DROPDOWN */
 .dropdown {
-  position: fixed;
+  position: absolute;
   top: 70px;
   width: 100%;
   background: white;
   display: none;
-  z-index: 999;
-  padding: 30px 60px;
+  z-index: 20;
 }
 
 .dropdown.show {
   display: block;
 }
 
-/* GRID (3x2) */
 .dropdown-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-
-.dropdown-item {
-  text-align: center;
-  cursor: pointer;
+  padding: 30px;
+  gap: 20px;
 }
 
 .dropdown-item img {
   width: 100%;
   height: 120px;
   object-fit: cover;
-  border-radius: 10px;
 }
 
 .dropdown-item p {
+  text-align: center;
   margin-top: 10px;
-  font-weight: 500;
 }
+
+/* FAKE CONTENT BELOW (to test scroll) */
+.content {
+  height: 150vh;
+  background: #111;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header class="tesla-header">
-  <div class="logo">TESLA</div>
+<header class="hero">
 
+  <!-- SLIDER -->
+  <div class="slider">
+    <div class="slide active" style="background-image:url('https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg')"></div>
+    <div class="slide" style="background-image:url('https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg')"></div>
+    <div class="slide" style="background-image:url('https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg')"></div>
+  </div>
+
+  <!-- NAV -->
   <nav class="nav-center">
-    <a href="#" class="nav-item" data-menu="vehicles">Vehicles</a>
-    <a href="#" class="nav-item" data-menu="energy">Energy</a>
-    <a href="#" class="nav-item" data-menu="charging">Charging</a>
+    <div class="nav-item" data-menu="vehicles">Vehicles</div>
+    <div class="nav-item" data-menu="energy">Energy</div>
+    <div class="nav-item" data-menu="charging">Charging</div>
   </nav>
 
-  <div class="nav-right">
-    <div class="menu-btn">Menu</div>
+  <!-- DROPDOWN -->
+  <div id="dropdown" class="dropdown">
+    <div id="dropdown-content"></div>
   </div>
+
 </header>
 
-<!-- DROPDOWN -->
-<div class="dropdown" id="dropdown">
-  <div class="dropdown-content" id="dropdown-content"></div>
-</div>
-
-<!-- SIDE MENU -->
-<div class="side-menu" id="menu">
-  <a href="#">Model S</a>
-  <a href="#">Model 3</a>
-  <a href="#">Model X</a>
-  <a href="#">Model Y</a>
-  <a href="#">Solar</a>
-  <a href="#">Shop</a>
-</div>
-
-<!-- SECTIONS -->
-<section class="section" style="background-image:url('https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg')">
-  <h1>Model S</h1>
-  <div class="buttons">
-    <button class="dark">Order</button>
-    <button class="light">Learn</button>
-  </div>
-</section>
-
-<section class="section" style="background-image:url('https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg')">
-  <h1>Model 3</h1>
-  <div class="buttons">
-    <button class="dark">Order</button>
-    <button class="light">Learn</button>
-  </div>
-</section>
-
-<section class="section" style="background-image:url('https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg')">
-  <h1>Model X</h1>
-  <div class="buttons">
-    <button class="dark">Order</button>
-    <button class="light">Learn</button>
-  </div>
-</section>
+<!-- EXTRA CONTENT -->
+<div class="content"></div>
 
 <script>
-const header = document.querySelector('.tesla-header');
-const menuBtn = document.querySelector('.menu-btn');
-const menu = document.getElementById('menu');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-});
-
-menuBtn.addEventListener('click', () => {
-  menu.classList.toggle('open');
-});
-
-  <script>
 const navItems = document.querySelectorAll('.nav-item');
 const dropdown = document.getElementById('dropdown');
 const dropdownContent = document.getElementById('dropdown-content');
 
-/* MENU DATA (Tesla-style vehicles) */
+/* MENU DATA */
 const menus = {
   vehicles: [
     { name: "Model S", img: "https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg" },
@@ -299,17 +175,38 @@ function renderMenu(type) {
   `;
 }
 
-/* KEEP OPEN WHEN HOVERING DROPDOWN */
+/* KEEP OPEN */
 dropdown.addEventListener('mouseenter', () => {
   dropdown.classList.add('show');
 });
 
-/* CLOSE WHEN CLICK OUTSIDE */
+/* CLOSE */
 document.addEventListener('click', (e) => {
   if (!e.target.closest('.nav-center') && !e.target.closest('.dropdown')) {
     dropdown.classList.remove('show');
   }
 });
+
+/* ========================= */
+/* HERO SLIDER (FIXED) */
+/* ========================= */
+
+const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
+
+function showSlide(index) {
+  slides.forEach(slide => slide.classList.remove('active'));
+  slides[index].classList.add('active');
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+
+/* AUTO LOOP */
+setInterval(nextSlide, 4000);
+
 </script>
 
 </body>
