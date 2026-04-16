@@ -6,30 +6,14 @@
 <title>Tesla UI Clone</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:sans-serif;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
 body{background:#fff;}
 
 /* HERO */
-.hero{
-  position:relative;
-  height:100vh;
-  overflow:hidden;
-}
+.hero{position:relative;height:100vh;overflow:hidden;}
 
-/* SLIDER */
-.slider{
-  position:absolute;
-  width:100%;
-  height:100%;
-}
+.slider{position:absolute;width:100%;height:100%;}
 
-/* IMAGE SLIDES */
 .slide{
   position:absolute;
   width:100%;
@@ -39,12 +23,9 @@ body{background:#fff;}
   opacity:0;
   transition:1s ease;
 }
+.slide.active{opacity:1;}
 
-.slide.active{
-  opacity:1;
-}
-
-/* HERO TEXT */
+/* HERO CONTENT */
 .hero-content{
   position:absolute;
   top:22%;
@@ -72,29 +53,18 @@ body{background:#fff;}
   cursor:pointer;
 }
 
-.primary{
-  background:#000;
-  color:#fff;
-}
-
-.secondary{
-  background:rgba(255,255,255,0.8);
-  color:#000;
-}
+.primary{background:#000;color:#fff;}
+.secondary{background:rgba(255,255,255,0.8);color:#000;}
 
 /* NAVBAR */
 .navbar{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
+  top:0;left:0;width:100%;
   z-index:20;
-
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:18px 5vw;
-
   background:#fff;
   color:#000;
 }
@@ -103,44 +73,21 @@ body{background:#fff;}
   background:rgba(245,245,245,0.92);
 }
 
-.logo{
-  font-weight:bold;
-  letter-spacing:3px;
-  color:#000;
-}
-
-.nav-center{
-  display:flex;
-  gap:25px;
-}
-
-.nav-item{
-  cursor:pointer;
-  font-size:14px;
-  color:#000;
-}
-
-.nav-right{
-  display:flex;
-  gap:10px;
-}
+.logo{font-weight:bold;letter-spacing:3px;}
+.nav-center{display:flex;gap:25px;}
+.nav-item{cursor:pointer;font-size:14px;}
+.nav-right{display:flex;gap:10px;}
 
 .icon{
-  width:32px;
-  height:32px;
-  border-radius:50%;
+  width:32px;height:32px;border-radius:50%;
   background:rgba(0,0,0,0.1);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex;align-items:center;justify-content:center;
 }
 
 /* DROPDOWN */
 .dropdown{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
+  top:0;left:0;width:100%;
   display:none;
   z-index:10;
 }
@@ -152,9 +99,7 @@ body{background:#fff;}
   padding-top:90px;
 }
 
-.dropdown-wrapper{
-  padding:40px 5vw;
-}
+.dropdown-wrapper{padding:40px 5vw;}
 
 .dropdown-grid{
   display:grid;
@@ -162,9 +107,7 @@ body{background:#fff;}
   gap:30px;
 }
 
-.dropdown-item{
-  text-align:center;
-}
+.dropdown-item{text-align:center;}
 
 .dropdown-item img{
   width:100%;
@@ -185,10 +128,54 @@ body{background:#fff;}
   text-decoration:underline;
 }
 
-/* RESPONSIVE */
+/* CAROUSEL */
+.car-carousel{padding:50px 5vw;}
+
+.carousel-title{margin-bottom:20px;}
+
+.carousel-track{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+}
+
+.carousel-track::-webkit-scrollbar{display:none;}
+
+.car-card{
+  flex:0 0 auto;
+  width:clamp(240px,28vw,360px);
+  border-radius:12px;
+  overflow:hidden;
+  background:#f5f5f5;
+  scroll-snap-align:start;
+}
+
+.car-card img{
+  width:100%;
+  height:70%;
+  object-fit:cover;
+}
+
+.car-card h3{padding:10px;}
+
+/* ARROWS */
+.arrow{
+  position:absolute;
+  top:55%;
+  transform:translateY(-50%);
+  width:40px;height:40px;
+  border:none;border-radius:50%;
+  background:rgba(0,0,0,0.6);
+  color:#fff;cursor:pointer;
+}
+.arrow.left{left:10px;}
+.arrow.right{right:10px;}
+
 @media(max-width:768px){
   .nav-center{display:none;}
   .dropdown-grid{grid-template-columns:1fr;}
+  .arrow{display:none;}
 }
 </style>
 </head>
@@ -197,25 +184,15 @@ body{background:#fff;}
 
 <header class="hero">
 
-<!-- SLIDER (IMAGE ONLY) -->
+<!-- SLIDER -->
 <div class="slider">
+  <div class="slide active" data-title="Model S" style="background-image:url('https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg')"></div>
 
-  <div class="slide active" data-title="Model S"
-    style="background-image:url('https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg')">
-  </div>
+  <div class="slide" data-title="Model 3" style="background-image:url('https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg')"></div>
 
-  <div class="slide" data-title="Model 3"
-    style="background-image:url('https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg')">
-  </div>
+  <div class="slide" data-title="Model X" style="background-image:url('https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg')"></div>
 
-  <div class="slide" data-title="Model X"
-    style="background-image:url('https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg')">
-  </div>
-
-  <div class="slide" data-title="Cybertruck"
-    style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/4/4d/Tesla_Cybertruck_outside_unveil_modified_by_Smnt.jpg')">
-  </div>
-
+  <div class="slide" data-title="Cybertruck" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/4/4d/Tesla_Cybertruck_outside_unveil_modified_by_Smnt.jpg')"></div>
 </div>
 
 <!-- HERO TEXT -->
@@ -254,23 +231,41 @@ body{background:#fff;}
 
 </header>
 
+<!-- CAROUSEL -->
+<section class="car-carousel">
+
+<h2 class="carousel-title">Discover Vehicles</h2>
+
+<button class="arrow left" onclick="scrollCarousel(-1)">❮</button>
+<button class="arrow right" onclick="scrollCarousel(1)">❯</button>
+
+<div class="carousel-track" id="carouselTrack">
+  <div class="car-card"><img src="https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg"><h3>Model S</h3></div>
+  <div class="car-card"><img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg"><h3>Model 3</h3></div>
+  <div class="car-card"><img src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"><h3>Model X</h3></div>
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Tesla_Cybertruck_outside_unveil_modified_by_Smnt.jpg"><h3>Cybertruck</h3></div>
+</div>
+
+</section>
+
 <script>
 
-/* SLIDER */
+/* HERO SLIDES */
 const slides=document.querySelectorAll('.slide');
 const heroTitle=document.getElementById('heroTitle');
 
-let current=0;
-
-function update(){
-  heroTitle.textContent=slides[current].dataset.title;
+function updateHero(index){
+  const title=slides[index].dataset.title;
+  heroTitle.textContent=title;
 }
+
+let current=0;
 
 setInterval(()=>{
   slides[current].classList.remove('active');
   current=(current+1)%slides.length;
   slides[current].classList.add('active');
-  update();
+  updateHero(current);
 },4000);
 
 /* MENU */
@@ -286,19 +281,34 @@ vehicles:[
 energy:[
 {name:"Solar Panels",img:"https://images.pexels.com/photos/9875441/pexels-photo-9875441.jpeg"},
 {name:"Solar Roof",img:"https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg"},
-{name:"Powerwall",img:"https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg"}
+{name:"Powerwall",img:"https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg"},
+{name:"Megapack",img:"https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg"},
+{name:"Grid Services",img:"https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg"},
+{name:"Energy Software",img:"https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg"}
 ],
 charging:[
 {name:"Supercharger",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
-{name:"Home Charging",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"}
+{name:"Home Charging",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"},
+{name:"Wall Connector",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
+{name:"Charging Map",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"},
+{name:"Adapters",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
+{name:"Charging Tips",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"}
 ],
 discover:[
 {name:"Demo Drive",img:"https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg"},
-{name:"Insurance",img:"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"}
+{name:"Insurance",img:"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"},
+{name:"Fleet",img:"https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"},
+{name:"Careers",img:"https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"},
+{name:"Investors",img:"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"},
+{name:"Events",img:"https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg"}
 ],
 shop:[
 {name:"Accessories",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"},
-{name:"Apparel",img:"https://images.pexels.com/photos/1002649/pexels-photo-1002649.jpeg"}
+{name:"Charging Gear",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
+{name:"Apparel",img:"https://images.pexels.com/photos/1002649/pexels-photo-1002649.jpeg"},
+{name:"Lifestyle",img:"https://images.pexels.com/photos/1002649/pexels-photo-1002649.jpeg"},
+{name:"Roof Rack",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"},
+{name:"Wheels",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"}
 ]
 };
 
@@ -337,6 +347,13 @@ dropdown.classList.remove('show');
 document.querySelector('.navbar').classList.remove('active');
 }
 });
+
+/* CAROUSEL */
+function scrollCarousel(dir){
+const track=document.getElementById('carouselTrack');
+const card=track.querySelector('.car-card');
+track.scrollBy({left:dir*(card.offsetWidth+16),behavior:'smooth'});
+}
 
 </script>
 
