@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Tesla Style Clone</title>
+<title>Tesla Clone</title>
 
 <style>
 * {
@@ -12,7 +12,11 @@
   font-family: sans-serif;
 }
 
-/* ================= HERO ================= */
+body {
+  background: #fff;
+}
+
+/* HERO */
 .hero {
   position: relative;
   height: 100vh;
@@ -40,7 +44,7 @@
   opacity: 1;
 }
 
-/* ================= NAVBAR ================= */
+/* NAVBAR */
 .navbar {
   position: relative;
   z-index: 10;
@@ -51,47 +55,37 @@
   color: white;
 }
 
-/* LOGO */
 .logo {
-  font-size: 18px;
   font-weight: bold;
   letter-spacing: 3px;
 }
 
-/* CENTER MENU */
 .nav-center {
   display: flex;
-  gap: 26px;
+  gap: 25px;
 }
 
 .nav-item {
   cursor: pointer;
   font-size: 14px;
-  color: white;
 }
 
-/* RIGHT SIDE */
 .nav-right {
   display: flex;
-  gap: 16px;
-  align-items: center;
-  font-size: 14px;
+  gap: 10px;
 }
 
-/* ICON STYLE */
 .icon {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
+  background: rgba(255,255,255,0.2);
   display: flex;
-  justify-content: center;
   align-items: center;
-  cursor: pointer;
-  background: rgba(255,255,255,0.15);
-  color: white;
+  justify-content: center;
 }
 
-/* ================= DROPDOWN ================= */
+/* DROPDOWN */
 .dropdown {
   position: absolute;
   top: 70px;
@@ -103,10 +97,9 @@
 .dropdown.show {
   display: block;
   backdrop-filter: blur(18px);
-  background: rgba(235, 235, 235, 0.72);
+  background: rgba(235,235,235,0.7);
 }
 
-/* GRID */
 .dropdown-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -114,91 +107,44 @@
   padding: 60px 80px;
 }
 
-/* ITEM */
 .dropdown-item img {
   width: 100%;
-  height: 150px;
+  height: 140px;
   object-fit: cover;
   border-radius: 6px;
 }
 
 .dropdown-item p {
-  margin-top: 10px;
-  font-size: 14px;
   text-align: center;
+  margin-top: 8px;
   color: #111;
 }
 
-/* ================= MOBILE ================= */
-.mobile-menu {
-  display: none;
-  font-size: 22px;
-  cursor: pointer;
-}
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-
-  .nav-center {
-    display: none;
-  }
-
-  .mobile-menu {
-    display: block;
-  }
-
-  .dropdown-grid {
-    grid-template-columns: 1fr;
-    padding: 30px;
-  }
-
-  .navbar {
-    padding: 15px 20px;
-  }
-}
-
-/* FAKE SCROLL CONTENT */
-.content {
-  height: 150vh;
-  background: #111;
-}
-
-  .car-carousel {
-  background: #fff;
-  padding: 80px 40px;
+/* CAROUSEL */
+.car-carousel {
+  position: relative;
+  padding: 40px;
 }
 
 .carousel-title {
   font-size: 28px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
-/* horizontal scroll container */
 .carousel-track {
   display: flex;
-  gap: 25px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 20px;
-}
-
-/* hide scrollbar (clean Tesla look) */
-.carousel-track::-webkit-scrollbar {
-  display: none;
+  gap: 20px;
+  overflow: hidden;
+  scroll-behavior: smooth;
 }
 
 .car-card {
-  min-width: 320px;
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-  border-radius: 10px;
+  min-width: 380px;
+  height: 260px;
+  border-radius: 12px;
   overflow: hidden;
   background: #f5f5f5;
-  transition: transform 0.3s ease;
-}
-
-.car-card:hover {
-  transform: scale(1.03);
+  flex: 0 0 auto;
 }
 
 .car-card img {
@@ -208,14 +154,32 @@
 }
 
 .car-card h3 {
-  padding: 15px 15px 5px;
+  padding: 10px;
 }
 
-.car-card p {
-  padding: 0 15px 20px;
-  color: #555;
+/* ARROWS */
+.arrow {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
 }
-  }
+
+.arrow.left { left: 10px; }
+.arrow.right { right: 10px; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .nav-center { display: none; }
+  .dropdown-grid { grid-template-columns: 1fr; padding: 30px; }
+}
 </style>
 </head>
 
@@ -223,148 +187,102 @@
 
 <header class="hero">
 
-  <!-- SLIDER -->
-  <div class="slider">
-    <div class="slide active" style="background-image:url('https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg')"></div>
-    <div class="slide" style="background-image:url('https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg')"></div>
-    <div class="slide" style="background-image:url('https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg')"></div>
+<div class="slider">
+  <div class="slide active" style="background-image:url('https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg')"></div>
+  <div class="slide" style="background-image:url('https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg')"></div>
+  <div class="slide" style="background-image:url('https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg')"></div>
+</div>
+
+<div class="navbar">
+  <div class="logo">TESLA</div>
+
+  <nav class="nav-center">
+    <div class="nav-item" data-menu="vehicles">Vehicles</div>
+    <div class="nav-item" data-menu="energy">Energy</div>
+    <div class="nav-item" data-menu="charging">Charging</div>
+    <div class="nav-item" data-menu="discover">Discover</div>
+    <div class="nav-item" data-menu="shop">Shop</div>
+  </nav>
+
+  <div class="nav-right">
+    <div class="icon">S</div>
+    <div class="icon">A</div>
+    <div class="icon">☰</div>
   </div>
+</div>
 
-  <!-- NAVBAR -->
-  <div class="navbar">
-
-    <div class="logo">TESLA</div>
-
-    <nav class="nav-center">
-      <div class="nav-item" data-menu="vehicles">Vehicles</div>
-      <div class="nav-item" data-menu="energy">Energy</div>
-      <div class="nav-item" data-menu="charging">Charging</div>
-      <div class="nav-item" data-menu="discover">Discover</div>
-      <div class="nav-item" data-menu="shop">Shop</div>
-    </nav>
-
-    <div class="nav-right">
-      <div class="icon">S</div>
-      <div class="icon">A</div>
-      <div class="mobile-menu">☰</div>
-    </div>
-
-  </div>
-
-  <!-- DROPDOWN -->
-  <div id="dropdown" class="dropdown">
-    <div id="dropdown-content"></div>
-  </div>
+<div id="dropdown" class="dropdown">
+  <div id="dropdown-content"></div>
+</div>
 
 </header>
 
-<div class="content"></div>
-
-
+<!-- CAROUSEL -->
 <section class="car-carousel">
 
-  <h2 class="carousel-title">Discover Vehicles</h2>
+<h2 class="carousel-title">Discover Vehicles</h2>
 
-  <div class="carousel-track">
+<button class="arrow left" onclick="scrollCarousel(-1)">❮</button>
+<button class="arrow right" onclick="scrollCarousel(1)">❯</button>
 
-    <div class="car-card">
-      <img src="https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg">
-      <h3>Model S</h3>
-      <p>From $74,990</p>
-    </div>
+<div class="carousel-track" id="carouselTrack">
 
-    <div class="car-card">
-      <img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg">
-      <h3>Model 3</h3>
-      <p>From $39,990</p>
-    </div>
-
-    <div class="car-card">
-      <img src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg">
-      <h3>Model X</h3>
-      <p>From $79,990</p>
-    </div>
-
-    <div class="car-card">
-      <img src="https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg">
-      <h3>Model Y</h3>
-      <p>From $44,990</p>
-    </div>
-
-    <div class="car-card">
-      <img src="https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg">
-      <h3>Cybertruck</h3>
-      <p>Coming Soon</p>
-    </div>
-
+  <div class="car-card">
+    <img src="https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg">
+    <h3>Model S</h3>
   </div>
 
-</section>
-  
-<script>
+  <div class="car-card">
+    <img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg">
+    <h3>Model 3</h3>
+  </div>
 
+  <div class="car-card">
+    <img src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg">
+    <h3>Model X</h3>
+  </div>
+
+  <div class="car-card">
+    <img src="https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg">
+    <h3>Model Y</h3>
+  </div>
+
+</div>
+
+</section>
+
+<script>
 const navItems = document.querySelectorAll('.nav-item');
 const dropdown = document.getElementById('dropdown');
 const dropdownContent = document.getElementById('dropdown-content');
 
-/* FULL MENU DATA */
 const menus = {
-  vehicles: [
-    { name: "Model S", img: "https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg" },
-    { name: "Model 3", img: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg" },
-    { name: "Model X", img: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg" },
-    { name: "Model Y", img: "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg" },
-    { name: "Cybertruck", img: "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg" }
-  ],
-
-  energy: [
-    { name: "Solar Panels", img: "https://images.pexels.com/photos/9875441/pexels-photo-9875441.jpeg" },
-    { name: "Solar Roof", img: "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg" },
-    { name: "Powerwall", img: "https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg" }
-  ],
-
-  charging: [
-    { name: "Supercharging", img: "https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg" },
-    { name: "Home Charging", img: "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg" }
-  ],
-
-  discover: [
-    { name: "Our Story", img: "https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg" },
-    { name: "Careers", img: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg" },
-    { name: "Investor Relations", img: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg" }
-  ],
-
-  shop: [
-    { name: "Vehicle Accessories", img: "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg" },
-    { name: "Charging Gear", img: "https://images.pexels.com/photos/163210/pexels-photo-163210.jpeg" },
-    { name: "Apparel", img: "https://images.pexels.com/photos/1002649/pexels-photo-1002649.jpeg" }
-  ]
+  vehicles: [{name:"Model S",img:"https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg"}],
+  energy: [{name:"Solar Panels",img:"https://images.pexels.com/photos/9875441/pexels-photo-9875441.jpeg"}],
+  charging: [{name:"Supercharging",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"}],
+  discover: [{name:"Careers",img:"https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"}],
+  shop: [{name:"Accessories",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"}]
 };
 
-/* DROPDOWN */
-navItems.forEach(item => {
-  item.addEventListener('mouseenter', () => {
-    renderMenu(item.dataset.menu);
+navItems.forEach(item=>{
+  item.addEventListener('mouseenter',()=>{
+    const data = menus[item.dataset.menu];
+    dropdownContent.innerHTML = `
+      <div class="dropdown-grid">
+        ${data.map(i=>`
+          <div class="dropdown-item">
+            <img src="${i.img}">
+            <p>${i.name}</p>
+          </div>
+        `).join('')}
+      </div>
+    `;
     dropdown.classList.add('show');
   });
 });
 
-function renderMenu(type) {
-  dropdownContent.innerHTML = `
-    <div class="dropdown-grid">
-      ${menus[type].map(i => `
-        <div class="dropdown-item">
-          <img src="${i.img}">
-          <p>${i.name}</p>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
-
-/* CLOSE DROPDOWN */
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.navbar') && !e.target.closest('.dropdown')) {
+document.addEventListener('click', e=>{
+  if(!e.target.closest('.navbar') && !e.target.closest('.dropdown')){
     dropdown.classList.remove('show');
   }
 });
@@ -373,16 +291,17 @@ document.addEventListener('click', (e) => {
 const slides = document.querySelectorAll('.slide');
 let current = 0;
 
-setInterval(() => {
+setInterval(()=>{
   slides[current].classList.remove('active');
-  current = (current + 1) % slides.length;
+  current = (current+1)%slides.length;
   slides[current].classList.add('active');
-}, 4000);
+},4000);
 
-  html {
-  scroll-behavior: smooth;
+/* CAROUSEL ARROWS */
+function scrollCarousel(dir){
+  const track = document.getElementById('carouselTrack');
+  track.scrollBy({ left: dir*400, behavior: 'smooth' });
 }
-  
 </script>
 
 </body>
