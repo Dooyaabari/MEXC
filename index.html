@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tesla Style Clone</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+/* HEADER */
+.tesla-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  z-index: 1000;
+  transition: 0.4s;
+}
+
+.tesla-header.scrolled {
+  background: rgba(255,255,255,0.9);
+  color: black;
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  letter-spacing: 10px;
+  font-weight: 700;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 25px;
+}
+
+.nav-center a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 15px;
+}
+
+.menu-btn {
+  cursor: pointer;
+}
+
+/* SIDE MENU */
+.side-menu {
+  position: fixed;
+  right: -300px;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background: white;
+  transition: 0.4s;
+  padding: 20px;
+  z-index: 2000;
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+.side-menu a {
+  display: block;
+  margin: 15px 0;
+  text-decoration: none;
+  color: black;
+}
+
+/* SECTIONS */
+.section {
+  height: 100vh;
+  scroll-snap-align: start;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding-top: 100px;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+.buttons {
+  margin-bottom: 40px;
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.dark { background: black; color: white; }
+.light { background: white; color: black; }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .nav-center {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="tesla-header">
+  <div class="logo">TESLA</div>
+
+  <nav class="nav-center">
+    <a href="#">Model S</a>
+    <a href="#">Model 3</a>
+    <a href="#">Model X</a>
+    <a href="#">Model Y</a>
+  </nav>
+
+  <div class="nav-right">
+    <div class="menu-btn">Menu</div>
+  </div>
+</header>
+
+<!-- SIDE MENU -->
+<div class="side-menu" id="menu">
+  <a href="#">Model S</a>
+  <a href="#">Model 3</a>
+  <a href="#">Model X</a>
+  <a href="#">Model Y</a>
+  <a href="#">Solar</a>
+  <a href="#">Shop</a>
+</div>
+
+<!-- SECTIONS -->
+<section class="section" style="background-image:url('https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg')">
+  <h1>Model S</h1>
+  <div class="buttons">
+    <button class="dark">Order</button>
+    <button class="light">Learn</button>
+  </div>
+</section>
+
+<section class="section" style="background-image:url('https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg')">
+  <h1>Model 3</h1>
+  <div class="buttons">
+    <button class="dark">Order</button>
+    <button class="light">Learn</button>
+  </div>
+</section>
+
+<section class="section" style="background-image:url('https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg')">
+  <h1>Model X</h1>
+  <div class="buttons">
+    <button class="dark">Order</button>
+    <button class="light">Learn</button>
+  </div>
+</section>
+
+<script>
+const header = document.querySelector('.tesla-header');
+const menuBtn = document.querySelector('.menu-btn');
+const menu = document.getElementById('menu');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+menuBtn.addEventListener('click', () => {
+  menu.classList.toggle('open');
+});
+</script>
+
+</body>
+</html>
