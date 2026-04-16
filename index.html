@@ -12,7 +12,7 @@
   font-family: sans-serif;
 }
 
-/* HERO SECTION */
+/* HERO */
 .hero {
   position: relative;
   height: 100vh;
@@ -41,54 +41,84 @@
 }
 
 /* NAVBAR */
-.nav-center {
+.navbar {
   position: relative;
   z-index: 10;
   display: flex;
-  justify-content: center;
-  gap: 30px;
-  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
   color: white;
+}
+
+/* LEFT LOGO */
+.logo {
+  font-size: 20px;
   font-weight: bold;
+  letter-spacing: 3px;
+}
+
+/* CENTER MENU */
+.nav-center {
+  display: flex;
+  gap: 25px;
 }
 
 .nav-item {
   cursor: pointer;
 }
 
+/* RIGHT MENU */
+.nav-right {
+  display: flex;
+  gap: 20px;
+}
+
 /* DROPDOWN */
 .dropdown {
   position: absolute;
-  top: 70px;
+  top: 80px;
   width: 100%;
-  background: white;
   display: none;
   z-index: 20;
 }
 
+/* DUSTY BACKGROUND */
 .dropdown.show {
   display: block;
+  backdrop-filter: blur(15px);
+  background: rgba(240, 240, 240, 0.75);
 }
 
+/* GRID */
 .dropdown-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding: 30px;
-  gap: 20px;
+  gap: 40px;
+  padding: 50px 80px;
 }
 
+/* ITEMS */
+.dropdown-item {
+  text-align: center;
+}
+
+/* IMAGES FULL BLEED STYLE */
 .dropdown-item img {
   width: 100%;
-  height: 120px;
+  height: 140px;
   object-fit: cover;
+  border-radius: 6px;
 }
 
+/* TEXT */
 .dropdown-item p {
-  text-align: center;
   margin-top: 10px;
+  font-size: 14px;
+  color: #111;
 }
 
-/* FAKE CONTENT BELOW (to test scroll) */
+/* FAKE CONTENT */
 .content {
   height: 150vh;
   background: #111;
@@ -107,12 +137,27 @@
     <div class="slide" style="background-image:url('https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg')"></div>
   </div>
 
-  <!-- NAV -->
-  <nav class="nav-center">
-    <div class="nav-item" data-menu="vehicles">Vehicles</div>
-    <div class="nav-item" data-menu="energy">Energy</div>
-    <div class="nav-item" data-menu="charging">Charging</div>
-  </nav>
+  <!-- NAVBAR -->
+  <div class="navbar">
+
+    <!-- LEFT -->
+    <div class="logo">TESLA</div>
+
+    <!-- CENTER -->
+    <nav class="nav-center">
+      <div class="nav-item" data-menu="vehicles">Vehicles</div>
+      <div class="nav-item" data-menu="energy">Energy</div>
+      <div class="nav-item" data-menu="charging">Charging</div>
+    </nav>
+
+    <!-- RIGHT -->
+    <div class="nav-right">
+      <div>Shop</div>
+      <div>Account</div>
+      <div>Menu</div>
+    </div>
+
+  </div>
 
   <!-- DROPDOWN -->
   <div id="dropdown" class="dropdown">
@@ -121,7 +166,6 @@
 
 </header>
 
-<!-- EXTRA CONTENT -->
 <div class="content"></div>
 
 <script>
@@ -159,7 +203,7 @@ navItems.forEach(item => {
   });
 });
 
-/* RENDER GRID */
+/* RENDER */
 function renderMenu(type) {
   const items = menus[type];
 
@@ -182,20 +226,17 @@ dropdown.addEventListener('mouseenter', () => {
 
 /* CLOSE */
 document.addEventListener('click', (e) => {
-  if (!e.target.closest('.nav-center') && !e.target.closest('.dropdown')) {
+  if (!e.target.closest('.navbar') && !e.target.closest('.dropdown')) {
     dropdown.classList.remove('show');
   }
 });
 
-/* ========================= */
-/* HERO SLIDER (FIXED) */
-/* ========================= */
-
+/* SLIDER */
 const slides = document.querySelectorAll('.slide');
 let currentSlide = 0;
 
 function showSlide(index) {
-  slides.forEach(slide => slide.classList.remove('active'));
+  slides.forEach(s => s.classList.remove('active'));
   slides[index].classList.add('active');
 }
 
@@ -204,9 +245,7 @@ function nextSlide() {
   showSlide(currentSlide);
 }
 
-/* AUTO LOOP */
 setInterval(nextSlide, 4000);
-
 </script>
 
 </body>
