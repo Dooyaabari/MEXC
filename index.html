@@ -9,11 +9,21 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
 body{background:#fff;}
 
-/* HERO */
-.hero{position:relative;height:100vh;overflow:hidden;}
+/* ================= HERO ================= */
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
 
-.slider{position:absolute;width:100%;height:100%;}
+/* SLIDER WRAPPER */
+.slider{
+  position:absolute;
+  width:100%;
+  height:100%;
+}
 
+/* IMAGE SLIDES */
 .slide{
   position:absolute;
   width:100%;
@@ -23,9 +33,27 @@ body{background:#fff;}
   opacity:0;
   transition:1s ease;
 }
+
 .slide.active{opacity:1;}
 
-/* HERO CONTENT */
+/* VIDEO SLIDE */
+.video-slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  opacity:0;
+  transition:1s ease;
+}
+
+.video-slide video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.video-slide.active{opacity:1;}
+
+/* HERO TEXT */
 .hero-content{
   position:absolute;
   top:22%;
@@ -56,15 +84,19 @@ body{background:#fff;}
 .primary{background:#000;color:#fff;}
 .secondary{background:rgba(255,255,255,0.8);color:#000;}
 
-/* NAVBAR */
+/* ================= NAVBAR ================= */
 .navbar{
   position:fixed;
-  top:0;left:0;width:100%;
+  top:0;
+  left:0;
+  width:100%;
   z-index:20;
+
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:18px 5vw;
+
   background:#fff;
   color:#000;
 }
@@ -73,21 +105,44 @@ body{background:#fff;}
   background:rgba(245,245,245,0.92);
 }
 
-.logo{font-weight:bold;letter-spacing:3px;}
-.nav-center{display:flex;gap:25px;}
-.nav-item{cursor:pointer;font-size:14px;}
-.nav-right{display:flex;gap:10px;}
-
-.icon{
-  width:32px;height:32px;border-radius:50%;
-  background:rgba(0,0,0,0.1);
-  display:flex;align-items:center;justify-content:center;
+.logo{
+  font-weight:bold;
+  letter-spacing:3px;
+  color:#000;
 }
 
-/* DROPDOWN */
+.nav-center{
+  display:flex;
+  gap:25px;
+}
+
+.nav-item{
+  cursor:pointer;
+  font-size:14px;
+  color:#000;
+}
+
+.nav-right{
+  display:flex;
+  gap:10px;
+}
+
+.icon{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:rgba(0,0,0,0.1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ================= DROPDOWN ================= */
 .dropdown{
   position:fixed;
-  top:0;left:0;width:100%;
+  top:0;
+  left:0;
+  width:100%;
   display:none;
   z-index:10;
 }
@@ -99,7 +154,9 @@ body{background:#fff;}
   padding-top:90px;
 }
 
-.dropdown-wrapper{padding:40px 5vw;}
+.dropdown-wrapper{
+  padding:40px 5vw;
+}
 
 .dropdown-grid{
   display:grid;
@@ -107,7 +164,9 @@ body{background:#fff;}
   gap:30px;
 }
 
-.dropdown-item{text-align:center;}
+.dropdown-item{
+  text-align:center;
+}
 
 .dropdown-item img{
   width:100%;
@@ -128,10 +187,14 @@ body{background:#fff;}
   text-decoration:underline;
 }
 
-/* CAROUSEL */
-.car-carousel{padding:50px 5vw;}
+/* ================= CAROUSEL ================= */
+.car-carousel{
+  padding:50px 5vw;
+}
 
-.carousel-title{margin-bottom:20px;}
+.carousel-title{
+  margin-bottom:20px;
+}
 
 .carousel-track{
   display:flex;
@@ -164,14 +227,19 @@ body{background:#fff;}
   position:absolute;
   top:55%;
   transform:translateY(-50%);
-  width:40px;height:40px;
-  border:none;border-radius:50%;
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:50%;
   background:rgba(0,0,0,0.6);
-  color:#fff;cursor:pointer;
+  color:#fff;
+  cursor:pointer;
 }
+
 .arrow.left{left:10px;}
 .arrow.right{right:10px;}
 
+/* RESPONSIVE */
 @media(max-width:768px){
   .nav-center{display:none;}
   .dropdown-grid{grid-template-columns:1fr;}
@@ -184,15 +252,28 @@ body{background:#fff;}
 
 <header class="hero">
 
-<!-- SLIDER -->
+<!-- ================= HERO SLIDES ================= -->
 <div class="slider">
-  <div class="slide active" data-title="Model S" style="background-image:url('https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg')"></div>
 
-  <div class="slide" data-title="Model 3" style="background-image:url('https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg')"></div>
+  <div class="slide active" data-title="Model S"
+    style="background-image:url('https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg')">
+  </div>
 
-  <div class="slide" data-title="Model X" style="background-image:url('https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg')"></div>
+  <div class="slide" data-title="Model 3"
+    style="background-image:url('https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg')">
+  </div>
 
-  <div class="slide" data-title="Cybertruck" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/4/4d/Tesla_Cybertruck_outside_unveil_modified_by_Smnt.jpg')"></div>
+  <div class="slide" data-title="Model X"
+    style="background-image:url('https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg')">
+  </div>
+
+  <!-- VIDEO SLIDE -->
+  <div class="video-slide slide" data-title="Cybertruck Autopilot">
+    <video autoplay muted loop playsinline>
+      <source src="https://cdn.coverr.co/videos/coverr-self-driving-car-technology-9387/1080p.mp4" type="video/mp4">
+    </video>
+  </div>
+
 </div>
 
 <!-- HERO TEXT -->
@@ -250,22 +331,36 @@ body{background:#fff;}
 
 <script>
 
-/* HERO SLIDES */
+/* HERO SLIDER */
 const slides=document.querySelectorAll('.slide');
 const heroTitle=document.getElementById('heroTitle');
 
+let current=0;
+
 function updateHero(index){
-  const title=slides[index].dataset.title;
-  heroTitle.textContent=title;
+  heroTitle.textContent=slides[index].dataset.title;
 }
 
-let current=0;
+function handleVideo(index, prevIndex){
+  const prevVideo=slides[prevIndex]?.querySelector('video');
+  if(prevVideo) prevVideo.pause();
+
+  const newVideo=slides[index]?.querySelector('video');
+  if(newVideo) newVideo.play();
+}
 
 setInterval(()=>{
   slides[current].classList.remove('active');
+
+  const prev=current;
+
   current=(current+1)%slides.length;
+
   slides[current].classList.add('active');
+
   updateHero(current);
+  handleVideo(current, prev);
+
 },4000);
 
 /* MENU */
@@ -290,17 +385,15 @@ charging:[
 {name:"Supercharger",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
 {name:"Home Charging",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"},
 {name:"Wall Connector",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
-{name:"Charging Map",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"},
-{name:"Adapters",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
 {name:"Charging Tips",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"}
 ],
 discover:[
 {name:"Demo Drive",img:"https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg"},
 {name:"Insurance",img:"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"},
-{name:"Fleet",img:"https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"},
 {name:"Careers",img:"https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"},
-{name:"Investors",img:"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"},
-{name:"Events",img:"https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg"}
+{name:"Events",img:"https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg"},
+{name:"Fleet",img:"https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"},
+{name:"Investors",img:"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"}
 ],
 shop:[
 {name:"Accessories",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"},
