@@ -6,7 +6,13 @@
 <title>Tesla UI Clone</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:sans-serif;
+}
+
 body{background:#fff;}
 
 /* ================= HERO ================= */
@@ -16,7 +22,7 @@ body{background:#fff;}
   overflow:hidden;
 }
 
-/* SLIDER WRAPPER */
+/* SLIDER */
 .slider{
   position:absolute;
   width:100%;
@@ -34,7 +40,9 @@ body{background:#fff;}
   transition:1s ease;
 }
 
-.slide.active{opacity:1;}
+.slide.active{
+  opacity:1;
+}
 
 /* VIDEO SLIDE */
 .video-slide{
@@ -51,7 +59,9 @@ body{background:#fff;}
   object-fit:cover;
 }
 
-.video-slide.active{opacity:1;}
+.video-slide.active{
+  opacity:1;
+}
 
 /* HERO TEXT */
 .hero-content{
@@ -81,8 +91,15 @@ body{background:#fff;}
   cursor:pointer;
 }
 
-.primary{background:#000;color:#fff;}
-.secondary{background:rgba(255,255,255,0.8);color:#000;}
+.primary{
+  background:#000;
+  color:#fff;
+}
+
+.secondary{
+  background:rgba(255,255,255,0.8);
+  color:#000;
+}
 
 /* ================= NAVBAR ================= */
 .navbar{
@@ -187,63 +204,10 @@ body{background:#fff;}
   text-decoration:underline;
 }
 
-/* ================= CAROUSEL ================= */
-.car-carousel{
-  padding:50px 5vw;
-}
-
-.carousel-title{
-  margin-bottom:20px;
-}
-
-.carousel-track{
-  display:flex;
-  gap:16px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-}
-
-.carousel-track::-webkit-scrollbar{display:none;}
-
-.car-card{
-  flex:0 0 auto;
-  width:clamp(240px,28vw,360px);
-  border-radius:12px;
-  overflow:hidden;
-  background:#f5f5f5;
-  scroll-snap-align:start;
-}
-
-.car-card img{
-  width:100%;
-  height:70%;
-  object-fit:cover;
-}
-
-.car-card h3{padding:10px;}
-
-/* ARROWS */
-.arrow{
-  position:absolute;
-  top:55%;
-  transform:translateY(-50%);
-  width:40px;
-  height:40px;
-  border:none;
-  border-radius:50%;
-  background:rgba(0,0,0,0.6);
-  color:#fff;
-  cursor:pointer;
-}
-
-.arrow.left{left:10px;}
-.arrow.right{right:10px;}
-
-/* RESPONSIVE */
+/* ================= RESPONSIVE ================= */
 @media(max-width:768px){
   .nav-center{display:none;}
   .dropdown-grid{grid-template-columns:1fr;}
-  .arrow{display:none;}
 }
 </style>
 </head>
@@ -252,7 +216,7 @@ body{background:#fff;}
 
 <header class="hero">
 
-<!-- ================= HERO SLIDES ================= -->
+<!-- ================= SLIDER ================= -->
 <div class="slider">
 
   <div class="slide active" data-title="Model S"
@@ -267,10 +231,10 @@ body{background:#fff;}
     style="background-image:url('https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg')">
   </div>
 
-  <!-- VIDEO SLIDE -->
+  <!-- ✅ CYBERTRUCK VIDEO (WORKING AUTOPLAY FIXED) -->
   <div class="video-slide slide" data-title="Cybertruck Autopilot">
-    <video autoplay muted loop playsinline>
-      <source src="https://cdn.coverr.co/videos/coverr-self-driving-car-technology-9387/1080p.mp4" type="video/mp4">
+    <video muted autoplay loop playsinline>
+      <source src="https://cdn.coverr.co/videos/coverr-driving-a-tesla-7-1525/1080p.mp4" type="video/mp4">
     </video>
   </div>
 
@@ -312,58 +276,56 @@ body{background:#fff;}
 
 </header>
 
-<!-- CAROUSEL -->
-<section class="car-carousel">
-
-<h2 class="carousel-title">Discover Vehicles</h2>
-
-<button class="arrow left" onclick="scrollCarousel(-1)">❮</button>
-<button class="arrow right" onclick="scrollCarousel(1)">❯</button>
-
-<div class="carousel-track" id="carouselTrack">
-  <div class="car-card"><img src="https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg"><h3>Model S</h3></div>
-  <div class="car-card"><img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg"><h3>Model 3</h3></div>
-  <div class="car-card"><img src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"><h3>Model X</h3></div>
-  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Tesla_Cybertruck_outside_unveil_modified_by_Smnt.jpg"><h3>Cybertruck</h3></div>
-</div>
-
-</section>
-
 <script>
 
-/* HERO SLIDER */
-const slides=document.querySelectorAll('.slide');
-const heroTitle=document.getElementById('heroTitle');
+/* ================= SLIDER LOGIC ================= */
+const slides = document.querySelectorAll('.slide');
+const heroTitle = document.getElementById('heroTitle');
 
-let current=0;
+let current = 0;
 
-function updateHero(index){
-  heroTitle.textContent=slides[index].dataset.title;
+function updateSlide(index){
+  heroTitle.textContent = slides[index].dataset.title;
 }
 
-function handleVideo(index, prevIndex){
-  const prevVideo=slides[prevIndex]?.querySelector('video');
-  if(prevVideo) prevVideo.pause();
+function switchSlides(next){
 
-  const newVideo=slides[index]?.querySelector('video');
-  if(newVideo) newVideo.play();
-}
+  const prev = current;
 
-setInterval(()=>{
-  slides[current].classList.remove('active');
+  slides[prev].classList.remove('active');
 
-  const prev=current;
+  const prevVideo = slides[prev].querySelector('video');
+  if(prevVideo){
+    prevVideo.pause();
+    prevVideo.currentTime = 0;
+  }
 
-  current=(current+1)%slides.length;
+  current = next;
 
   slides[current].classList.add('active');
 
-  updateHero(current);
-  handleVideo(current, prev);
+  const newVideo = slides[current].querySelector('video');
+  if(newVideo){
+    newVideo.play().catch(()=>{});
+  }
 
-},4000);
+  updateSlide(current);
+}
 
-/* MENU */
+setInterval(()=>{
+  let next = (current + 1) % slides.length;
+  switchSlides(next);
+}, 4000);
+
+/* FORCE VIDEO AUTOPLAY ON LOAD */
+window.addEventListener('load', ()=>{
+  const v = document.querySelector('.video-slide video');
+  if(v){
+    v.play().catch(()=>{});
+  }
+});
+
+/* ================= MENU ================= */
 const menus={
 vehicles:[
 {name:"Model S",img:"https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg"},
@@ -378,30 +340,19 @@ energy:[
 {name:"Solar Roof",img:"https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg"},
 {name:"Powerwall",img:"https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg"},
 {name:"Megapack",img:"https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg"},
-{name:"Grid Services",img:"https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg"},
 {name:"Energy Software",img:"https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg"}
 ],
 charging:[
 {name:"Supercharger",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
-{name:"Home Charging",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"},
-{name:"Wall Connector",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
-{name:"Charging Tips",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"}
+{name:"Home Charging",img:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg"}
 ],
 discover:[
 {name:"Demo Drive",img:"https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg"},
-{name:"Insurance",img:"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"},
-{name:"Careers",img:"https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"},
-{name:"Events",img:"https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg"},
-{name:"Fleet",img:"https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"},
-{name:"Investors",img:"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"}
+{name:"Insurance",img:"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"}
 ],
 shop:[
 {name:"Accessories",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"},
-{name:"Charging Gear",img:"https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg"},
-{name:"Apparel",img:"https://images.pexels.com/photos/1002649/pexels-photo-1002649.jpeg"},
-{name:"Lifestyle",img:"https://images.pexels.com/photos/1002649/pexels-photo-1002649.jpeg"},
-{name:"Roof Rack",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"},
-{name:"Wheels",img:"https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg"}
+{name:"Apparel",img:"https://images.pexels.com/photos/1002649/pexels-photo-1002649.jpeg"}
 ]
 };
 
@@ -440,13 +391,6 @@ dropdown.classList.remove('show');
 document.querySelector('.navbar').classList.remove('active');
 }
 });
-
-/* CAROUSEL */
-function scrollCarousel(dir){
-const track=document.getElementById('carouselTrack');
-const card=track.querySelector('.car-card');
-track.scrollBy({left:dir*(card.offsetWidth+16),behavior:'smooth'});
-}
 
 </script>
 
